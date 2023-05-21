@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dk82bqkkrhq4j"]
+
+[ext_resource type="PackedScene" uid="uid://dwm2dkrrlj7f3" path="res://Dialogue/dialogue_canvas.tscn" id="1_jwie1"]
+[ext_resource type="PackedScene" uid="uid://dlbx1i1vvwvln" path="res://Dialogue/DialogueTrigger.tscn" id="2_hy45j"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="DialogueCanvas" parent="." instance=ExtResource("1_jwie1")]
+
+[node name="DialogueTrigger" parent="." instance=ExtResource("2_hy45j")]
+position = Vector2(269, 280)

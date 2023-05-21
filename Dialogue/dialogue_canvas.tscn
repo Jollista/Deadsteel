@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=3 uid="uid://dwm2dkrrlj7f3"]
+
+[ext_resource type="Script" path="res://Dialogue/DialogueCanvas.gd" id="1_ptaou"]
+[ext_resource type="Texture2D" uid="uid://c2qnha11fchjc" path="res://icon.svg" id="2_2inie"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_l1kkx"]
+streams_count = 1
+stream_0/weight = 1.0
+
+[node name="DialogueCanvas" type="CanvasLayer"]
+script = ExtResource("1_ptaou")
+
+[node name="Portrait" type="Sprite2D" parent="."]
+position = Vector2(182, 361)
+
+[node name="Dialogue" type="Sprite2D" parent="."]
+self_modulate = Color(0, 0, 0, 1)
+position = Vector2(574, 558)
+scale = Vector2(8.73438, 1.125)
+texture = ExtResource("2_2inie")
+
+[node name="TextLabels" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 574.0
+offset_top = 558.0
+offset_right = 614.0
+offset_bottom = 598.0
+
+[node name="Name" type="RichTextLabel" parent="TextLabels"]
+offset_left = -488.0
+offset_top = -69.0
+offset_right = 513.0
+offset_bottom = -40.0
+text = "Name"
+
+[node name="Text" type="RichTextLabel" parent="TextLabels"]
+offset_left = -488.0
+offset_top = -36.0
+offset_right = 506.0
+offset_bottom = 57.0
+text = "Text lorem ipsum blah blah blah who cares hahaha I'm just gonna fill this up with whatever maybe I should increase the font size but I guess that's something to think about later cause right now I just need to see if this works and I think it does since it's based on an old system that works but you never know what errors'll pop up, y'know? Anyways, here's that. This is that is what's happening and now I'm testing it and yup yup hopefully it works. Mhm. Nah, it's broke as hell lmao."
+
+[node name="Delay" type="Timer" parent="."]
+
+[node name="Voice" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_l1kkx")
+
+[node name="SFX" type="AudioStreamPlayer2D" parent="."]
