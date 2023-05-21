@@ -8,7 +8,7 @@ const NORM = 0.025
 const SLOW = 0.1
 
 # text speed
-@export var text_speed = FAST
+@export var text_speed = NORM
 
 # reference to components
 @onready var dialogue_box = $Dialogue
@@ -160,6 +160,21 @@ func next_line():
 	# write phrase
 	while chat.visible_characters < len(chat.text):
 		chat.visible_characters += 1 # make next char visible
+		
+		# pause for punctuation
+		match chat.text.substr(chat.visible_characters, 1):
+			".":
+				timer.start(text_speed*10)
+				await timer.timeout
+			"?":
+				timer.start(text_speed*10)
+				await timer.timeout
+			",": 
+				timer.start(text_speed*6)
+				await timer.timeout
+		
+		timer.set_wait_time(text_speed)
+		
 		if not muted:
 			voice.play() # play funny little sound hahaha make me laugh
 		# delay between characters made visible

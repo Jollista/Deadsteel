@@ -28,6 +28,7 @@ offset_right = 614.0
 offset_bottom = 598.0
 
 [node name="Name" type="RichTextLabel" parent="TextLabels"]
+layout_mode = 0
 offset_left = -488.0
 offset_top = -69.0
 offset_right = 513.0
@@ -35,6 +36,7 @@ offset_bottom = -40.0
 text = "Name"
 
 [node name="Text" type="RichTextLabel" parent="TextLabels"]
+layout_mode = 0
 offset_left = -488.0
 offset_top = -36.0
 offset_right = 506.0
