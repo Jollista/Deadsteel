@@ -4,12 +4,14 @@
 [ext_resource type="Texture2D" uid="uid://c2qnha11fchjc" path="res://icon.svg" id="2_f0oo8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5y1rj"]
-radius = 105.119
+radius = 65.0
 
 [node name="DialogueTrigger" type="Node2D"]
 script = ExtResource("1_5g2ey")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1.90735e-06, -1.90735e-06)
+scale = Vector2(0.3125, 0.3125)
 texture = ExtResource("2_f0oo8")
 
 [node name="Area2D" type="Area2D" parent="."]

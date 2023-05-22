@@ -50,7 +50,7 @@ func _ready():
 
 func _process(_delta):
 	# allows player to skip dialogue animation
-	if skipping or active and (Input.is_action_just_pressed("ui_accept")):
+	if skipping or active and (Input.is_action_just_pressed("interact")):
 		if finished: # go to next line
 			next_line()
 			skipping = false

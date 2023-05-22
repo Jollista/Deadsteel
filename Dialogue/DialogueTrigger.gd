@@ -14,7 +14,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if player_in_range and Input.is_action_just_pressed("ui_accept"):
+	if player_in_range and Input.is_action_just_pressed("interact"):
 		trigger_dialogue()
 
 # choose a dialogue and then have dialogue_canvas start it
