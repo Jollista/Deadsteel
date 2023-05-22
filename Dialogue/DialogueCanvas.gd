@@ -120,14 +120,24 @@ func next_line():
 			stream.add_stream(0, load(voice_sound)) # set its stream to character's voice
 			voice.set_stream(stream) # set randomizer as voice's stream
 	
+	# Update portrait if specified
 	if dialogue[current_dialogue].has("Portrait"):
 		var img = "res://Dialogue/Portraits/" + character_name + "/" + dialogue[current_dialogue]["Portrait"] + ".png"
-		if FileAccess.file_exists(img):
-			portrait.texture = load(img)
-		elif FileAccess.file_exists(default_portrait): 
-			portrait.texture = "res://Dialogue/Portraits/" + character_name + "/default.png"
-		else:
-			portrait.texture = null
+		if FileAccess.file_exists(img): # if specified image exists
+			portrait.texture = load(img) # set it to specified image
+		elif FileAccess.file_exists(default_portrait): # else, if character has a default image
+			portrait.texture = "res://Dialogue/Portraits/" + character_name + "/default.png" # set it to that
+		else: # no default image
+			portrait.texture = null # set portrait to null
+	
+	# Play sound effect if specified
+	if dialogue[current_dialogue].has("SFX"):
+		var effect = "res://Dialogue/Sounds/Sound Effects/" + dialogue[current_dialogue]["SFX"]
+		# if file exists
+		if FileAccess.file_exists(effect):
+			# load and play it
+			sfx.set_stream(load(effect))
+			sfx.play()
 	
 	# change speed of text progression if needed
 	if dialogue[current_dialogue].has("Speed"):
