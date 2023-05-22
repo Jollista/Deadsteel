@@ -66,9 +66,6 @@ func start_dialogue(filepath:String=""):
 	# load dialogue
 	dialogue = load_dialogue()
 	
-	# pause game
-	pause()
-	
 	# initial yield before it matters bc that one messes with 
 	# chat.visible_characters for some reason
 	timer.set_wait_time(text_speed)
@@ -79,6 +76,9 @@ func start_dialogue(filepath:String=""):
 	current_dialogue = 0
 	active = true
 	set_visible(active)
+	
+	# pause game
+	pause()
 	
 	# update text
 	next_line()
@@ -165,7 +165,7 @@ func next_line():
 		chat.visible_characters += 1 # make next char visible
 		
 		# pause for punctuation
-		match chat.text.substr(chat.visible_characters, 1):
+		match chat.text.substr(chat.visible_characters-1, 1):
 			".":
 				timer.start(text_speed*10)
 				await timer.timeout
@@ -208,13 +208,9 @@ func end_dialogue():
 	dialogue_ended.emit()
 
 func unpause():
-	# set invisible
-	visible = false
 	# unpause game
 	get_tree().set_deferred("paused", false)
 
 func pause():
-	# set visible
-	visible = true
 	# pause game
 	get_tree().set_deferred("paused", true)
