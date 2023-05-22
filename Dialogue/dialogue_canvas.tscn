@@ -8,6 +8,7 @@ streams_count = 1
 stream_0/weight = 1.0
 
 [node name="DialogueCanvas" type="CanvasLayer"]
+process_mode = 3
 script = ExtResource("1_ptaou")
 
 [node name="Portrait" type="Sprite2D" parent="."]

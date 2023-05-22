@@ -66,6 +66,9 @@ func start_dialogue(filepath:String=""):
 	# load dialogue
 	dialogue = load_dialogue()
 	
+	# pause game
+	pause()
+	
 	# initial yield before it matters bc that one messes with 
 	# chat.visible_characters for some reason
 	timer.set_wait_time(text_speed)
@@ -199,5 +202,19 @@ func end_dialogue():
 	set_visible(active)
 	current_dialogue = 0
 	
+	# unpause game
+	unpause()
 	# emit signal
 	dialogue_ended.emit()
+
+func unpause():
+	# set invisible
+	visible = false
+	# unpause game
+	get_tree().set_deferred("paused", false)
+
+func pause():
+	# set visible
+	visible = true
+	# pause game
+	get_tree().set_deferred("paused", true)
