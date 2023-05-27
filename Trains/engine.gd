@@ -7,22 +7,31 @@ var SPEED = 0.0
 @export var ACCELERATION = 0.05
 var track_progress = 0.0
 
+@onready var collider = $StaticBody2D/CollisionPolygon2D
+
 # true if train is stopping
 var stopping = false
 
+# reference to player, initialized on player enter area2D
 var player
+
+# true if player is in area2D, else false
 var player_can_board = false
+# true if player is on board this car, else false
 var player_on_board = false
 
 # manage player input
 func _process(_delta):
 	# board if not already on board, can board, and interacting
 	if !player_on_board and player_can_board and Input.is_action_just_pressed("interact"):
-		player_on_board = true
-		player.position = position
+		collider.set_build_mode(collider.BUILD_SEGMENTS) # set build mode to segments to allow player inside
+		player_on_board = true # update bool
+		player.position = position # set player position to inside car
+	
 	# exit if on_board and interacting
 	elif player_on_board and Input.is_action_just_pressed("interact"):
-		player_on_board = false
+		collider.set_build_mode(collider.BUILD_SOLIDS) # set build mode to solids to eject player
+		player_on_board = false # update bool
 
 # manages train's movement along a path2D track
 func _physics_process(_delta):	
@@ -51,7 +60,6 @@ func accelerate():
 # toggle stopping, for player control purposes
 func toggle_brake():
 	stopping = !stopping
-
 
 func _on_area_2d_body_entered(body):
 	if body.name == "Player":
