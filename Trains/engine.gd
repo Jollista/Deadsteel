@@ -20,6 +20,10 @@ func toggle_brake():
 	# stop self
 	stopping = !stopping
 
+# reverse direction
+func reverse():
+	MAX_SPEED = -MAX_SPEED
+
 # determine action based on stopping
 func manage_speed():
 	if stopping:
@@ -40,10 +44,33 @@ func update_position():
 	# update tail's position
 	update_next_car()
 
+# determine train movement and manage its speed/acceleration
 func car_action():
-	determine_braking()
+	determine_movement()
 	manage_speed()
 
-func determine_braking():
-	if player_on_board and Input.is_action_just_pressed("car_action"):
-		toggle_brake()
+func determine_movement():
+	if player_on_board:
+		# if braking
+		if Input.is_action_just_pressed("car_action"):
+			toggle_brake()
+		
+		# if reversing
+		if Input.is_action_just_pressed("car_action2"):
+			reverse()
+	
+	# animate directional/braking indicator
+	animate_indicator()
+
+var braking_color = Color(255,0,0)
+var going_color = Color(0,255,0)
+var reverse_color = Color(0,255,255)
+
+func animate_indicator():
+	if stopping:
+		$StaticBody2D/Sprite2D/DirectionIndicator.modulate = braking_color
+	else:
+		if MAX_SPEED < 0:
+			$StaticBody2D/Sprite2D/DirectionIndicator.modulate = reverse_color
+		else:
+			$StaticBody2D/Sprite2D/DirectionIndicator.modulate = going_color

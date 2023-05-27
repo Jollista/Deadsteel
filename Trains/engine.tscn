@@ -14,6 +14,13 @@ script = ExtResource("1_c4n00")
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
 texture = ExtResource("1_h6dc2")
 
+[node name="DirectionIndicator" type="Sprite2D" parent="StaticBody2D/Sprite2D"]
+modulate = Color(1, 0, 0, 1)
+position = Vector2(41, -45)
+rotation = 1.5708
+scale = Vector2(0.28125, 0.515625)
+texture = ExtResource("1_h6dc2")
+
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 polygon = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
 
