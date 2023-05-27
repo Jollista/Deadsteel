@@ -1,18 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://dlbx1i1vvwvln"]
+[gd_scene load_steps=5 format=3 uid="uid://dlbx1i1vvwvln"]
 
 [ext_resource type="Script" path="res://Dialogue/DialogueTrigger.gd" id="1_5g2ey"]
 [ext_resource type="Texture2D" uid="uid://c2qnha11fchjc" path="res://icon.svg" id="2_f0oo8"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_cmnfx"]
+radius = 22.0227
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_5y1rj"]
 radius = 65.0
 
-[node name="DialogueTrigger" type="Node2D"]
+[node name="DialogueTrigger" type="StaticBody2D"]
 script = ExtResource("1_5g2ey")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-1.90735e-06, -1.90735e-06)
 scale = Vector2(0.3125, 0.3125)
 texture = ExtResource("2_f0oo8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_cmnfx")
 
 [node name="Area2D" type="Area2D" parent="."]
 

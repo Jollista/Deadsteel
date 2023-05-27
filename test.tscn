@@ -1,10 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://dk82bqkkrhq4j"]
+[gd_scene load_steps=7 format=3 uid="uid://dk82bqkkrhq4j"]
 
+[ext_resource type="Script" path="res://CameraFollow.gd" id="1_51q7u"]
 [ext_resource type="PackedScene" uid="uid://dwm2dkrrlj7f3" path="res://Dialogue/dialogue_canvas.tscn" id="1_jwie1"]
 [ext_resource type="PackedScene" uid="uid://dlbx1i1vvwvln" path="res://Dialogue/DialogueTrigger.tscn" id="2_hy45j"]
 [ext_resource type="PackedScene" uid="uid://ci24drw2fal63" path="res://Player/player.tscn" id="3_tjli1"]
+[ext_resource type="PackedScene" uid="uid://bnx5khik0cuj4" path="res://Trains/engine.tscn" id="4_c0frl"]
+
+[sub_resource type="Curve2D" id="Curve2D_6g8im"]
+_data = {
+"points": PackedVector2Array(-509.008, 133.552, 509.008, -133.552, 84, 54, -292.302, 60.4762, 292.302, -60.4762, 1068, 50, 171.349, 336.399, -171.349, -336.399, 1062, 609, 162.53, 212.927, -162.53, -212.927, 88, 597, 0, 0, 0, 0, 84, 54)
+}
+point_count = 5
 
 [node name="Node2D" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("1_51q7u")
 
 [node name="DialogueCanvas" parent="." instance=ExtResource("1_jwie1")]
 
@@ -12,4 +23,11 @@
 position = Vector2(269, 280)
 
 [node name="Player" parent="." instance=ExtResource("3_tjli1")]
-position = Vector2(432, 388)
+position = Vector2(635, 322)
+
+[node name="Rail" type="Path2D" parent="."]
+curve = SubResource("Curve2D_6g8im")
+
+[node name="Engine" parent="Rail" instance=ExtResource("4_c0frl")]
+position = Vector2(84, 54)
+rotation = -0.256593

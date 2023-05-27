@@ -1,4 +1,4 @@
-extends Node2D
+extends StaticBody2D
 
 # true if the player is inside the area2d's collision shape; else, false
 var player_in_range = false
