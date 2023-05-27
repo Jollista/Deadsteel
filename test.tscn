@@ -22,12 +22,12 @@ script = ExtResource("1_51q7u")
 [node name="DialogueTrigger" parent="." instance=ExtResource("2_hy45j")]
 position = Vector2(269, 280)
 
-[node name="Player" parent="." instance=ExtResource("3_tjli1")]
-position = Vector2(635, 322)
-
 [node name="Rail" type="Path2D" parent="."]
 curve = SubResource("Curve2D_6g8im")
 
 [node name="Engine" parent="Rail" instance=ExtResource("4_c0frl")]
 position = Vector2(84, 54)
 rotation = -0.256593
+
+[node name="Player" parent="." instance=ExtResource("3_tjli1")]
+position = Vector2(635, 322)
