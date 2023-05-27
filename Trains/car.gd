@@ -1,11 +1,7 @@
 extends PathFollow2D
 
-# Max speed and current speed
-@export var MAX_SPEED = 7.0
-var SPEED = 0.0
-# Acceleration for starting and stopping
-@export var ACCELERATION = 0.05
-var track_progress = 0.0
+# distance between cars
+@export var DISTANCE = 10.0
 
 @onready var collider = $StaticBody2D/CollisionPolygon2D
 
@@ -20,9 +16,24 @@ var player_can_board = false
 # true if player is on board this car, else false
 var player_on_board = false
 
+# reference to next car in line
+@export var next_car : PathFollow2D
+
+# initialize next_car positions
+func _ready():
+	update_next_car()
+
 # manage player input
 func _process(_delta):
 	manage_boarding()
+
+# manages train's movement along a path2D track
+func _physics_process(_delta):
+	# update position on track
+	update_position()
+	
+	# perform car specific action
+	car_action()
 
 # manage player boarding and exiting the train
 func manage_boarding():
@@ -37,17 +48,15 @@ func manage_boarding():
 		collider.set_build_mode(collider.BUILD_SOLIDS) # set build mode to solids to eject player
 		player_on_board = false # update bool
 
-# decelerate to 0
-func decelerate():
-	SPEED = move_toward(SPEED, 0, ACCELERATION)
+# update position of self and player if player_on_board
+func update_position():
+	# update tail's position
+	update_next_car()
 
-# accelerate to max_speed
-func accelerate():
-	SPEED = move_toward(SPEED, MAX_SPEED, ACCELERATION)
-
-# toggle stopping, for player control purposes
-func toggle_brake():
-	stopping = !stopping
+func update_next_car():
+	if next_car != null:
+		next_car.set_progress(get_progress() - DISTANCE)
+		next_car.update_position()
 
 func _on_area_2d_body_entered(body):
 	if body.name == "Player":
@@ -57,3 +66,6 @@ func _on_area_2d_body_entered(body):
 func _on_area_2d_body_exited(body):
 	if body.name == "Player":
 		player_can_board = false
+
+func car_action():
+	pass
