@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://jmv2ubgsgjc0"]
+
+[ext_resource type="Script" path="res://Trains/car.gd" id="1_4sby0"]
+[ext_resource type="Texture2D" uid="uid://c2qnha11fchjc" path="res://icon.svg" id="1_nlqsy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ei12a"]
+size = Vector2(128, 250)
+
+[node name="EmptyCar" type="PathFollow2D"]
+script = ExtResource("1_4sby0")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+texture = ExtResource("1_nlqsy")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+build_mode = 1
+polygon = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_ei12a")

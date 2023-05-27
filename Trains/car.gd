@@ -6,7 +6,7 @@ extends PathFollow2D
 @onready var collider = $StaticBody2D/CollisionPolygon2D
 
 # true if train is stopping
-var stopping = false
+var stopping = true
 
 # reference to player, initialized on player enter area2D
 var player

@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://dk82bqkkrhq4j"]
+[gd_scene load_steps=8 format=3 uid="uid://dk82bqkkrhq4j"]
 
 [ext_resource type="Script" path="res://CameraFollow.gd" id="1_51q7u"]
 [ext_resource type="PackedScene" uid="uid://dwm2dkrrlj7f3" path="res://Dialogue/dialogue_canvas.tscn" id="1_jwie1"]
 [ext_resource type="PackedScene" uid="uid://dlbx1i1vvwvln" path="res://Dialogue/DialogueTrigger.tscn" id="2_hy45j"]
 [ext_resource type="PackedScene" uid="uid://ci24drw2fal63" path="res://Player/player.tscn" id="3_tjli1"]
 [ext_resource type="PackedScene" uid="uid://bnx5khik0cuj4" path="res://Trains/engine.tscn" id="4_c0frl"]
+[ext_resource type="PackedScene" uid="uid://jmv2ubgsgjc0" path="res://Trains/empty_car.tscn" id="5_cko5r"]
 
 [sub_resource type="Curve2D" id="Curve2D_6g8im"]
 _data = {
@@ -25,7 +26,13 @@ position = Vector2(269, 280)
 [node name="Rail" type="Path2D" parent="."]
 curve = SubResource("Curve2D_6g8im")
 
-[node name="Engine" parent="Rail" instance=ExtResource("4_c0frl")]
+[node name="Engine" parent="Rail" node_paths=PackedStringArray("next_car") instance=ExtResource("4_c0frl")]
+position = Vector2(84, 54)
+rotation = -0.256593
+DISTANCE = 130.0
+next_car = NodePath("../EmptyCar")
+
+[node name="EmptyCar" parent="Rail" instance=ExtResource("5_cko5r")]
 position = Vector2(84, 54)
 rotation = -0.256593
 

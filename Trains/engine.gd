@@ -19,10 +19,6 @@ func accelerate():
 func toggle_brake():
 	# stop self
 	stopping = !stopping
-	
-	# stop next_car if has next_car
-	if next_car != null:
-		next_car.toggle_brake()
 
 # determine action based on stopping
 func manage_speed():

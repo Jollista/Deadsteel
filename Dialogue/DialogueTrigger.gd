@@ -46,4 +46,4 @@ func _on_area_2d_body_entered(body):
 
 func _on_area_2d_body_exited(body):
 	if body.name == "Player":
-		player_in_range = true
+		player_in_range = false
