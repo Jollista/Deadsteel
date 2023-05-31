@@ -62,6 +62,7 @@ func determine_movement():
 	# animate directional/braking indicator
 	animate_indicator()
 
+# colors for temporary movement visualization
 var braking_color = Color(255,0,0)
 var going_color = Color(0,255,0)
 var reverse_color = Color(0,255,255)

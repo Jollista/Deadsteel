@@ -29,12 +29,18 @@ curve = SubResource("Curve2D_6g8im")
 [node name="Engine" parent="Rail" node_paths=PackedStringArray("next_car") instance=ExtResource("4_c0frl")]
 position = Vector2(84, 54)
 rotation = -0.256593
-DISTANCE = 130.0
 next_car = NodePath("../EmptyCar")
 
-[node name="EmptyCar" parent="Rail" instance=ExtResource("5_cko5r")]
+[node name="EmptyCar" parent="Rail" node_paths=PackedStringArray("next_car", "prev_car") instance=ExtResource("5_cko5r")]
 position = Vector2(84, 54)
 rotation = -0.256593
+next_car = NodePath("../EmptyCar2")
+prev_car = NodePath("../Engine")
+
+[node name="EmptyCar2" parent="Rail" node_paths=PackedStringArray("prev_car") instance=ExtResource("5_cko5r")]
+position = Vector2(84, 54)
+rotation = -0.256593
+prev_car = NodePath("../EmptyCar")
 
 [node name="Player" parent="." instance=ExtResource("3_tjli1")]
 position = Vector2(635, 322)

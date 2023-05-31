@@ -9,6 +9,12 @@ size = Vector2(128, 250)
 [node name="Engine" type="PathFollow2D"]
 script = ExtResource("1_c4n00")
 
+[node name="board_indicator" type="Sprite2D" parent="."]
+modulate = Color(0, 100, 0, 0.4)
+position = Vector2(0, 0.500008)
+scale = Vector2(1, 1.97656)
+texture = ExtResource("1_h6dc2")
+
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
@@ -25,9 +31,7 @@ texture = ExtResource("1_h6dc2")
 polygon = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
 
 [node name="Area2D" type="Area2D" parent="."]
+process_priority = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_3ok1l")
-
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
