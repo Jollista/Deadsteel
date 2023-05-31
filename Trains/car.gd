@@ -19,6 +19,12 @@ var player_can_board = false
 # true if player is on board this car, else false
 var player_on_board = false
 
+# true if player can hop from this car to another, else false
+var player_can_hop = true
+# cooldown for car-hopping
+@export var hop_delay = 0.1
+@onready var timer = $Timer
+
 # reference to next car in line (toward caboose)
 @export var next_car : PathFollow2D
 # reference to previous car in line (toward engine)
@@ -58,9 +64,14 @@ func manage_boarding():
 # board train car
 func board():
 	collider.set_build_mode(collider.BUILD_SEGMENTS) # set build mode to segments to allow player inside
-	player_on_board = true # update bool
-	print("player is ", player)
 	player.position = position # set player position to inside car
+	player_on_board = true # update bool
+	
+	# on board, wait a delay until player can hop again
+	player_can_hop = false
+	timer.start(hop_delay)
+	await timer.timeout
+	player_can_hop = true
 
 # exit train car
 func exit():
@@ -69,6 +80,10 @@ func exit():
 
 # manage moving between cars
 func manage_car_hopping():
+	# if can't hop, return
+	if !player_can_hop:
+		return
+	
 	# if player is on board, and input left, hop to next_car
 	if player_on_board and Input.is_action_just_pressed("left"):
 		hop_to(next_car)
@@ -79,12 +94,15 @@ func manage_car_hopping():
 func hop_to(target_car):
 	# do not hop to null car
 	if target_car != null:
+		print("Hopping to car ", target_car.name, " from ", name)
 		# exit car
 		exit()
 		# ensure player reference is non-null in target car
 		target_car.initialize_player(player)
 		# board
 		target_car.board()
+	else: 
+		print("Cannot hop to null car")
 
 # update position of self and player if player_on_board
 func update_position():

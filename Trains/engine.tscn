@@ -35,3 +35,7 @@ process_priority = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_3ok1l")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
