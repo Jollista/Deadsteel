@@ -55,7 +55,10 @@ func _physics_process(_delta):
 func manage_boarding():
 	# board if not already on board, can board, and interacting
 	if !player_on_board and player_can_board and Input.is_action_just_pressed("interact"):
-		board()
+		if prev_car != null and prev_car.player_can_board:
+			prev_car.board()
+		else:
+			board()
 	
 	# exit if on_board and interacting
 	elif player_on_board and Input.is_action_just_pressed("interact"):
