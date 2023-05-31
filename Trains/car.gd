@@ -19,6 +19,9 @@ var player_can_board = false
 # true if player is on board this car, else false
 var player_on_board = false
 
+# reference to empty node used as point player jumps to on exit
+@onready var exit_point = $ExitPoint
+
 # true if player can hop from this car to another, else false
 var player_can_hop = true
 # cooldown for car-hopping
@@ -53,16 +56,24 @@ func _physics_process(_delta):
 
 # manage player boarding and exiting the train
 func manage_boarding():
-	# board if not already on board, can board, and interacting
-	if !player_on_board and player_can_board and Input.is_action_just_pressed("interact"):
-		if prev_car != null and prev_car.player_can_board:
-			prev_car.board()
-		else:
-			board()
+	# update position of exit_point based on player input
+	manage_exit_point()
 	
 	# exit if on_board and interacting
-	elif player_on_board and Input.is_action_just_pressed("interact"):
+	if player_on_board and Input.is_action_just_pressed("interact"):
 		exit()
+	
+	# board if not already on board, can board, and interacting
+	elif !player_on_board and player_can_board and Input.is_action_just_pressed("interact"):
+		# if player is boarded on adjacent car, prioritize exiting
+		if (prev_car != null and prev_car.player_on_board) or (next_car != null and next_car.player_on_board):
+			print("Prioritizing exit")
+		# else prioritize boarding prev_car
+		elif prev_car != null and prev_car.player_can_board:
+			prev_car.board()
+		# else board this
+		else:
+			board()
 
 # board train car
 func board():
@@ -78,8 +89,18 @@ func board():
 
 # exit train car
 func exit():
+	player.position = exit_point.global_position # jump to exit point
 	collider.set_build_mode(collider.BUILD_SOLIDS) # set build mode to solids to eject player
 	player_on_board = false # update bool
+
+# update position of exit_point
+func manage_exit_point():
+	# if up, set exit point to above car
+	if player_on_board and Input.is_action_just_pressed("up"):
+		exit_point.position = -abs(exit_point.position)
+	# else if down, set exit point to below car
+	elif player_on_board and Input.is_action_just_pressed("down"):
+		exit_point.position = abs(exit_point.position)
 
 # manage moving between cars
 func manage_car_hopping():
