@@ -19,6 +19,9 @@ var player_can_board = false
 # true if player is on board this car, else false
 var player_on_board = false
 
+# true if coal is on board this car, else false
+var coal_on_board = false
+
 # reference to empty node used as point player jumps to on exit
 @onready var exit_point = $ExitPoint
 

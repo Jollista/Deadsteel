@@ -7,6 +7,8 @@ var SPEED = 0.0
 @export var ACCELERATION = 0.05
 var track_progress = 0.0
 
+@onready var direction_indicator = $StaticBody2D/Sprite2D/DirectionIndicator
+
 # decelerate to 0
 func decelerate():
 	SPEED = move_toward(SPEED, 0, ACCELERATION)
@@ -69,9 +71,9 @@ var reverse_color = Color(0,255,255)
 
 func animate_indicator():
 	if stopping:
-		$StaticBody2D/Sprite2D/DirectionIndicator.modulate = braking_color
+		direction_indicator.modulate = braking_color
 	else:
 		if MAX_SPEED < 0:
-			$StaticBody2D/Sprite2D/DirectionIndicator.modulate = reverse_color
+			direction_indicator.modulate = reverse_color
 		else:
-			$StaticBody2D/Sprite2D/DirectionIndicator.modulate = going_color
+			direction_indicator.modulate = going_color

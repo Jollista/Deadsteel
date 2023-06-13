@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://boq3e76dor4xg"]
+
+[ext_resource type="Texture2D" uid="uid://c2qnha11fchjc" path="res://icon.svg" id="1_6lumx"]
+[ext_resource type="Script" path="res://Characters/Coal/coal.gd" id="2_c5t5b"]
+
+[node name="Coal" type="Sprite2D"]
+scale = Vector2(0.312, 0.312)
+texture = ExtResource("1_6lumx")
+script = ExtResource("2_c5t5b")
