@@ -15,6 +15,12 @@ position = Vector2(0, 0.500008)
 scale = Vector2(1, 1.97656)
 texture = ExtResource("1_h6dc2")
 
+[node name="ExitPoint" type="Sprite2D" parent="."]
+modulate = Color(35.5, 100, 100, 1)
+position = Vector2(0, 100)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_h6dc2")
+
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
@@ -40,9 +46,3 @@ shape = SubResource("RectangleShape2D_3ok1l")
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
-
-[node name="ExitPoint" type="Sprite2D" parent="."]
-modulate = Color(35.5, 100, 100, 1)
-position = Vector2(0, 100)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("1_h6dc2")

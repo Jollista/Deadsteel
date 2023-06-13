@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=3 uid="uid://d24tc7hsklbt3"]
+
+[ext_resource type="Script" path="res://Trains/machine_gun.gd" id="1_6kh6p"]
+[ext_resource type="Texture2D" uid="uid://c2qnha11fchjc" path="res://icon.svg" id="2_vpns3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i28xd"]
+size = Vector2(128, 250)
+
+[node name="MachineGun" type="PathFollow2D"]
+script = ExtResource("1_6kh6p")
+
+[node name="board_indicator" type="Sprite2D" parent="."]
+modulate = Color(0, 100, 0, 0.4)
+position = Vector2(0, 0.500008)
+scale = Vector2(1, 1.97656)
+texture = ExtResource("2_vpns3")
+
+[node name="ExitPoint" type="Sprite2D" parent="."]
+modulate = Color(35.5, 100, 100, 1)
+position = Vector2(0, 100)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_vpns3")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+modulate = Color(1, 0, 0, 1)
+texture = ExtResource("2_vpns3")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+
+[node name="Area2D" type="Area2D" parent="."]
+process_priority = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_i28xd")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="GunDelay" type="Timer" parent="."]
+one_shot = true
+
+[node name="Crosshair" type="Sprite2D" parent="."]
+modulate = Color(1, 0.854902, 0, 1)
+position = Vector2(-112, 1)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_vpns3")
+
+[connection signal="timeout" from="GunDelay" to="." method="_on_gun_delay_timeout"]

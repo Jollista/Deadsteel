@@ -9,6 +9,11 @@ var track_progress = 0.0
 
 @onready var direction_indicator = $StaticBody2D/Sprite2D/DirectionIndicator
 
+# determine train movement and manage its speed/acceleration
+func car_action():
+	determine_movement()
+	manage_speed()
+
 # decelerate to 0
 func decelerate():
 	SPEED = move_toward(SPEED, 0, ACCELERATION)
@@ -45,11 +50,6 @@ func update_position():
 	
 	# update tail's position
 	update_next_car()
-
-# determine train movement and manage its speed/acceleration
-func car_action():
-	determine_movement()
-	manage_speed()
 
 func determine_movement():
 	if player_on_board:
