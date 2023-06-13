@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dk82bqkkrhq4j"]
+[gd_scene load_steps=10 format=3 uid="uid://dk82bqkkrhq4j"]
 
 [ext_resource type="Script" path="res://CameraFollow.gd" id="1_51q7u"]
 [ext_resource type="PackedScene" uid="uid://dwm2dkrrlj7f3" path="res://Dialogue/dialogue_canvas.tscn" id="1_jwie1"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bnx5khik0cuj4" path="res://Trains/engine.tscn" id="4_c0frl"]
 [ext_resource type="PackedScene" uid="uid://jmv2ubgsgjc0" path="res://Trains/empty_car.tscn" id="5_cko5r"]
 [ext_resource type="Script" path="res://MusicPlayer.gd" id="7_k7jhi"]
+[ext_resource type="PackedScene" uid="uid://kymw2tgdd467" path="res://Characters/Coal/coal.tscn" id="8_ev4xb"]
 
 [sub_resource type="Curve2D" id="Curve2D_6g8im"]
 _data = {
@@ -43,8 +44,13 @@ position = Vector2(84, 54)
 rotation = -0.256593
 prev_car = NodePath("../Car2")
 
+[node name="Coal" parent="." node_paths=PackedStringArray("car") instance=ExtResource("8_ev4xb")]
+position = Vector2(354, 124)
+car = NodePath("../Rail/Car2")
+
 [node name="Player" parent="." instance=ExtResource("3_tjli1")]
 position = Vector2(635, 322)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 script = ExtResource("7_k7jhi")

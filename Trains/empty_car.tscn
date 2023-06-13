@@ -18,6 +18,7 @@ texture = ExtResource("1_nlqsy")
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+modulate = Color(0.403922, 0.403922, 0.403922, 1)
 texture = ExtResource("1_nlqsy")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]

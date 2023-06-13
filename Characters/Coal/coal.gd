@@ -8,7 +8,7 @@ func _ready():
 		car.coal_on_board = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if car != null:
 		handle_input()
 		update_position()
